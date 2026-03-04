@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-import app.models.test as test_schema
+import app.models.User as user_model
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine
 app = FastAPI()
@@ -11,7 +11,7 @@ app.add_middleware(
     allow_methods=["*"],
 )
 
-test_schema.Base.metadata.create_all(bind=engine)
+user_model.Base.metadata.create_all(bind=engine)
 
 @app.get("/health")
 async def health():
