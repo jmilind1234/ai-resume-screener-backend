@@ -3,6 +3,7 @@ import app.models.User as user_model
 import app.models.Resume as resume_model
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine
+from app.routers import auth
 app = FastAPI()
 
 app.add_middleware(
@@ -15,6 +16,5 @@ app.add_middleware(
 user_model.Base.metadata.create_all(bind=engine)
 resume_model.Base.metadata.create_all(bind=engine)
 
-@app.get("/health")
-async def health():
-    return {"status": "ok"}
+
+app.include_router(auth.router)
