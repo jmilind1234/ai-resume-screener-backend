@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import app.models.User as user_model
+import app.models.Resume as resume_model
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine
 app = FastAPI()
@@ -12,6 +13,7 @@ app.add_middleware(
 )
 
 user_model.Base.metadata.create_all(bind=engine)
+resume_model.Base.metadata.create_all(bind=engine)
 
 @app.get("/health")
 async def health():
